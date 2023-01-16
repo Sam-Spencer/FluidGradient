@@ -8,6 +8,9 @@
 import SwiftUI
 
 public struct FluidGradient: View {
+    
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    
     private var blobs: [Color]
     private var highlights: [Color]
     private var speed: CGFloat
@@ -28,7 +31,7 @@ public struct FluidGradient: View {
     public var body: some View {
         Representable(blobs: blobs,
                       highlights: highlights,
-                      speed: speed,
+                      speed: reduceMotion ? 0 : speed,
                       blurValue: $blurValue)
         .blur(radius: pow(blurValue, blur))
         .accessibility(hidden: true)
